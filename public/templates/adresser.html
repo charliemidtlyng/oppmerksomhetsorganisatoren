@@ -1,0 +1,24 @@
+<h1>Adresser</h1>
+<form name="adresser" ng-submit="submitAdresse()">
+    <label>Adressenavn:<br/>
+        <input type="text" ng-model="adresse.navn" required />
+    </label>
+
+    <label>
+        Postnummer: <br />
+        <input type="number" ng-model="adresse.postnummer" name="aPostnummer"/>
+    </label>
+
+    <label>
+        Poststed: <br />
+        <input type="text" ng-model="adresse.poststed" required name="aPoststed"/>
+    </label>
+
+
+    <button ng-disabled="adresser.$invalid">Lagre</button>
+</form>
+<ul>
+    <li ng-repeat="adresse in adresseListe">
+        Navn: {{adresse.navn}}, Poststed: {{adresse.poststed}}, Postnummer: {{adresse.postnummer}} <button ng-click="slettAdresse(adresse)">Slett</button>
+    </li>
+</ul>
