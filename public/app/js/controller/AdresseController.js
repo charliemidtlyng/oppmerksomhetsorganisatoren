@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waAdresseController', [])
+angular.module('ooAdresseController', [])
 
     .controller('AdresseController', ['$scope', function ($scope) {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waPersonController', [])
+angular.module('ooPersonController', [])
 
     .controller('PersonController', ['$scope', function ($scope) {
 

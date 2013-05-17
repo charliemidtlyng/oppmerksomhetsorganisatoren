@@ -1,23 +1,11 @@
-angular.module('waRoutes', [])
+angular.module('ooRoutes', [])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
 
             .when('/', {
-                templateUrl: 'assets/templates/today.html',
-                controller: 'TodayController',
-                activetab: 'today' // TODO: Refactor to directive
-            })
-
-            .when('/week', {
-                templateUrl: 'assets/templates/week.html',
-                controller: 'WeekController',
-                activetab: 'week'
-            })
-
-            .when('/feedback', {
-                templateUrl: 'assets/templates/feedback.html',
-                controller: 'FeedbackController',
-                activetab: 'feedback'
+                templateUrl: 'assets/templates/personer.html',
+                controller: 'PersonController',
+                activetab: 'personer' // TODO: Refactor to directive
             })
 
             .when('/adresser', {

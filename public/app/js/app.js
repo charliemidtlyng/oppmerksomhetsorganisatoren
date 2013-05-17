@@ -1,16 +1,10 @@
 'use strict';
 
-angular.module('weatherApp', [
-    'waRoutes',
-    'waDirectives',
-    'waWeatherService',
-    'waSessionStore',
-    'waSearchTermController',
-    'waTodayController',
-    'waWeekController',
-    'waFeedbackController',
-    'waAdresseController',
-    'waPersonController',
+angular.module('ooApp', [
+    'ooRoutes',
+    'ooDirectives',
+    'ooAdresseController',
+    'ooPersonController',
 
     'ngResource'
 ]);

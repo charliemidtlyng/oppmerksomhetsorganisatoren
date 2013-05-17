@@ -9,10 +9,10 @@ GET     /                         controllers.Application.index
 GET     /assets/*file             controllers.Assets.at(path="/public", file)
 
 ## Tasks
-GET     /adresser                 controllers.Application.adresser
-POST    /adresser                 controllers.Application.nyAdresse
-POST    /adresser/:id/slett       controllers.Application.slettAdresse(id: Long)
+GET     /adresser                 controllers.AdresseController.adresser
+POST    /adresser                 controllers.AdresseController.nyAdresse
+POST    /adresser/:id/slett       controllers.AdresseController.slettAdresse(id: Long)
 #
-GET     /personer                 controllers.Application.personer
-POST    /personer                 controllers.Application.nyPerson
-POST    /personer/:id/slett       controllers.Application.slettPerson(id: Long)
+GET     /personer                 controllers.PersonController.personer
+POST    /personer                 controllers.PersonController.nyPerson
+POST    /personer/:id/slett       controllers.PersonController.slettPerson(id: Long)
