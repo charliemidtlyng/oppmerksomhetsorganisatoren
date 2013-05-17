@@ -12,7 +12,7 @@ CREATE TABLE adresse (
 
 CREATE SEQUENCE person_id_seq;
 CREATE TABLE person (
-    id bigint NOT NULL DEFAULT nextval('person_id_seq'),
+    id bigint NOT NULL DEFAULT nextval('person_id_seq') PRIMARY KEY,
     navn varchar(64),
     fodselsdato varchar(255),
     adresseId bigint(4),
