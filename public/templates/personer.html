@@ -6,7 +6,7 @@
 
     <label>
         Fodselsdato: <br />
-        <input type="date" ng-model="person.fodselsdato" required />
+        <input type="text" ng-model="person.fodselsdato" datepicker required />
     </label>
 
     <label>
@@ -21,10 +21,21 @@
         </select>
     </label>
 
-    <label>
-        Adressenavn:
-        <input type="text" ng-model="person.adresse.navn" ng-hide="person.adresse.id" />
-    </label>
+    <div ng-hide="person.adresse.id">
+        <label>Gateadresse:<br/>
+            <input type="text" ng-model="person.adresse.adressenavn" />
+        </label>
+
+        <label>
+            Postnummer: <br />
+            <input type="number" ng-model="person.adresse.postnummer" />
+        </label>
+
+        <label>
+            Poststed: <br />
+            <input type="text" ng-model="person.adresse.poststed" />
+        </label>
+    </div>
 
 
     <button ng-disabled="personer.$invalid">Lagre</button>

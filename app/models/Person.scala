@@ -8,16 +8,17 @@ import AnormExtension._
 import play.api.libs.json.Json
 
 
-case class Person(id: Option[Long], fodselsdato: DateTime, adresse: Adresse, info: String )
+case class Person(id: Option[Long], navn: String, fodselsdato: DateTime, adresse: Adresse, info: String )
 
 object Person {
 
   val person = {
     get[Option[Long]]("id") ~
+      get[String]("navn") ~
       get[DateTime]("fodselsdato") ~
       get[Long]("adresseId") ~
       get[String]("info") map {
-      case id~fodselsdato~adresse~info=> Person(id, fodselsdato, Adresse.finn(adresse), info)
+      case id~navn~fodselsdato~adresse~info=> Person(id, navn, fodselsdato, Adresse.finn(adresse), info)
     }
   }
 
@@ -28,7 +29,8 @@ object Person {
 
   def opprett(p:Person) = {
     DB.withConnection { implicit c =>
-      SQL("insert into person (fodselsdato, adresseId, info) values ({fodselsdato}, {adresseId}, {info})").on(
+      SQL("insert into person (navn, fodselsdato, adresseId, info) values ({navn}, {fodselsdato}, {adresseId}, {info})").on(
+        'navn -> p.navn,
         'fodselsdato -> p.fodselsdato,
         'adresseId-> p.adresse.id,
         'info-> p.info

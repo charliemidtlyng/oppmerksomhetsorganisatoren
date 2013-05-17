@@ -21,16 +21,28 @@ object Application extends Controller {
   val personForm: Form[Person] = Form(
     mapping(
       "id" -> optional(longNumber),
+      "navn" -> text,
       "fodselsdato" -> jodaDate("yyyy-MM-dd"),
       "adresse" -> mapping(
-        "adresseId" -> longNumber
+        "adresseId" -> optional(longNumber),
+        "adressenavn" -> optional(text),
+        "postnummer" -> optional(text),
+        "poststed" -> optional(text)
       )
-        ((adresseId: Long) => {
+        ((adresseId: Option[Long], adressenavn:Option[String], postnummer: Option[String], poststed: Option[String]) => {
           println("----------" + adresseId)
-          Adresse.finn(adresseId)
+          if(adresseId.isEmpty && (adressenavn.isEmpty || postnummer.isEmpty || poststed.isEmpty)){
+            BadRequest(Json.toJson("Mangler adresseinfo"))
+          }
+          if(adresseId.isEmpty) {
+            val a:Option[Long] = Adresse.opprett(Adresse(adresseId, adressenavn.get, postnummer.get, poststed.get))
+            Adresse.finn(a.get)
+          } else {
+            Adresse.finn(adresseId.get)
+          }
         })
-        ((adresse: Adresse) => Some(adresse.id.getOrElse(0L))),
-      "info" -> text
+        ((adresse: Adresse) => Some(adresse.id, Option(adresse.adressenavn), Option(adresse.postnummer), Option(adresse.poststed))),
+      "info" -> text(0)
 
     )(Person.apply)(Person.unapply)
   )

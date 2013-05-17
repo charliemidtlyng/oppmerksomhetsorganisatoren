@@ -27,7 +27,26 @@ angular.module('waDirectives', [])
             }
         }
     })
+    .directive('datepicker', function($parse){
+        var directiveDefinitionObject = {
+            restrict: 'A',
+            link: function postLink(scope, iElement, iAttrs) {
+                iElement.datepicker({
+                    format: 'yyyy-mm-dd'
+                }).on('changeDate', function(){
+                    $(this).datepicker('hide');
+                    var value = $(this).val();
+                    scope.$apply(function(scope){
+                        $parse(iAttrs.ngModel).assign(scope, value);
+                    });
 
+
+                    });
+            }
+        };
+        return directiveDefinitionObject;
+
+    })
     // Sets active class on current location link in Boostrap applications:
     .directive('activeTab', ['$location', function(location) {
         return {

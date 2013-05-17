@@ -1,7 +1,7 @@
 <h1>Adresser</h1>
 <form name="adresser" ng-submit="submitAdresse()">
-    <label>Adressenavn:<br/>
-        <input type="text" ng-model="adresse.navn" required />
+    <label>Gateadresse:<br/>
+        <input type="text" ng-model="adresse.adressenavn" required />
     </label>
 
     <label>
@@ -19,6 +19,6 @@
 </form>
 <ul>
     <li ng-repeat="adresse in adresseListe">
-        Navn: {{adresse.navn}}, Poststed: {{adresse.poststed}}, Postnummer: {{adresse.postnummer}} <button ng-click="slettAdresse(adresse)">Slett</button>
+        Gateadresse: {{adresse.adressenavn}}, Poststed: {{adresse.poststed}}, Postnummer: {{adresse.postnummer}} <button ng-click="slettAdresse(adresse)">Slett</button>
     </li>
 </ul>
