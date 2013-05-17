@@ -20,9 +20,9 @@ CREATE TABLE person (
     FOREIGN KEY (adresseId) REFERENCES adresse(id)
 );
 
-# --- !Downs
-DROP TABLE person;
-DROP SEQUENCE person_id_seq;
-
-DROP TABLE adresse;
-DROP SEQUENCE adresse_id_seq;
+-- # --- !Downs
+-- DROP TABLE person;
+-- DROP SEQUENCE person_id_seq;
+--
+-- DROP TABLE adresse;
+-- DROP SEQUENCE adresse_id_seq;
