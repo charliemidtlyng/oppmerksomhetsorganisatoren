@@ -19,8 +19,9 @@ CREATE TABLE person (
 );
 
 # --- !Downs
+DROP TABLE adresse;
+DROP SEQUENCE adresse_id_seq;
+
 DROP TABLE person;
 DROP SEQUENCE person_id_seq;
 
-DROP TABLE adresse;
-DROP SEQUENCE adresse_id_seq;
