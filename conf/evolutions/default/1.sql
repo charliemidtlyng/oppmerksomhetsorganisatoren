@@ -1,7 +1,6 @@
 # Tasks schema
 
 # --- !Ups
-
 CREATE SEQUENCE adresse_id_seq;
 CREATE TABLE adresse (
     id bigint NOT NULL DEFAULT nextval('adresse_id_seq') PRIMARY KEY,
