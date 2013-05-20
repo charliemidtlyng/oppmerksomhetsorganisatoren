@@ -14,7 +14,7 @@ CREATE TABLE person (
     id bigint NOT NULL DEFAULT nextval('person_id_seq') PRIMARY KEY,
     navn varchar(64),
     fodselsdato varchar(255),
-    adresseId bigint REFERENCES adresse(id),
+    adresseId bigint,
     info varchar(1023)
 );
 
