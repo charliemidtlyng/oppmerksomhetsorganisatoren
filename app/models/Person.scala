@@ -44,7 +44,10 @@ object Person {
         'id -> id
       ).executeUpdate()
     }
+  }
 
+  def finnPersonerPaaAdresse(adresseId: Long) : List[Person] = DB.withConnection { implicit c =>
+    SQL("select * from person where adresseId = {adresseId}").on("adresseId" -> adresseId).as(person *)
   }
   implicit val personFormat = Json.format[Person]
 }

@@ -64,4 +64,8 @@ object PersonController extends Controller {
     Ok(Json.toJson(Person.all()))
   }
 
+  def finnPersonerPaaAdresse(adresseId: Long) = Action {
+    Ok(Json.toJson(Person.finnPersonerPaaAdresse(adresseId)))
+  }
+
 }

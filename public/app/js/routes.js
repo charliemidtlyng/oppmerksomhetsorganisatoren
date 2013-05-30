@@ -18,6 +18,11 @@ angular.module('ooRoutes', [])
                 templateUrl: 'assets/templates/personer.html',
                 controller: 'PersonController',
                 activetab: 'personer'
+            }).
+            when('/personerPaaAdresse/:adresseId',{
+                templateUrl: 'assets/templates/personerPaaAdresse.html',
+                controller: 'PersonAdresseController',
+                activetab: 'personer'
             })
 
             .when('/404', { templateUrl: 'assets/templates/404.html' })

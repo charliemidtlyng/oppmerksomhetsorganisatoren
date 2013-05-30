@@ -31,6 +31,6 @@
 </form>
 <ul>
     <li ng-repeat="adresse in adresseListe">
-        Gateadresse: {{adresse.adressenavn}}, Poststed: {{adresse.poststed}}, Postnummer: {{adresse.postnummer}} <button ng-click="slettAdresse(adresse)">Slett</button>
+        <a href="#/personerPaaAdresse/{{adresse.id}}">Gateadresse: {{adresse.adressenavn}}, Poststed: {{adresse.poststed}}, Postnummer: {{adresse.postnummer}} </a><button ng-click="slettAdresse(adresse)">Slett</button>
     </li>
 </ul>

@@ -62,6 +62,6 @@
 </form>
 <ul>
     <li ng-repeat="person in personListe">
-        Navn: {{person.navn}}, Fdato: {{person.fodselsdato}}, Info: {{person.info}} <button ng-click="slettPerson(person)">Slett</button>
+        Navn: {{person.navn}}, Fdato: {{person.fodselsdato | date: 'dd-MM-yyyy'}}, Info: {{person.info}} <button ng-click="slettPerson(person)">Slett</button>
     </li>
 </ul>

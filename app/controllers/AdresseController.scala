@@ -25,6 +25,10 @@ object AdresseController extends Controller {
     Ok(Json.toJson(Adresse.all()))
   }
 
+  def adresse(id:Long) = Action {
+    Ok(Json.toJson(Adresse.finn(id)))
+  }
+
   def nyAdresse() = Action {
     implicit request =>
       println(adresseForm.hasErrors)

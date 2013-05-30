@@ -56,7 +56,6 @@ case class Adresse(id:Option[Long], adressenavn: String, postnummer: String, pos
     }
   }
 
-
     implicit val addresseFormat = Json.format[Adresse]
 
   }

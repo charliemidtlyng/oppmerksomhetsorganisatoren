@@ -5,6 +5,7 @@ angular.module('ooApp', [
     'ooDirectives',
     'ooAdresseController',
     'ooPersonController',
+    'ooPersonAdresseController',
 
     'ngResource'
 ]);

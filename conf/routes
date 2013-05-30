@@ -10,9 +10,11 @@ GET     /assets/*file             controllers.Assets.at(path="/public", file)
 
 ## Tasks
 GET     /adresser                 controllers.AdresseController.adresser
+GET     /adresse/:id              controllers.AdresseController.adresse(id: Long)
 POST    /adresser                 controllers.AdresseController.nyAdresse
 POST    /adresser/:id/slett       controllers.AdresseController.slettAdresse(id: Long)
 #
 GET     /personer                 controllers.PersonController.personer
 POST    /personer                 controllers.PersonController.nyPerson
 POST    /personer/:id/slett       controllers.PersonController.slettPerson(id: Long)
+GET     /personerPaaAdresse/:adresseId controllers.PersonController.finnPersonerPaaAdresse(adresseId: Long)
