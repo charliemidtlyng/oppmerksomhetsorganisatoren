@@ -26,7 +26,6 @@ object PersonController extends Controller {
         "poststed" -> optional(text)
       )
         ((adresseId: Option[Long], adressenavn:Option[String], postnummer: Option[String], poststed: Option[String]) => {
-          println("----------" + adresseId)
           if(adresseId.isEmpty && (adressenavn.isEmpty || postnummer.isEmpty || poststed.isEmpty)){
             BadRequest(Json.toJson("Mangler adresseinfo"))
           }
@@ -38,7 +37,7 @@ object PersonController extends Controller {
           }
         })
         ((adresse: Adresse) => Some(adresse.id, Option(adresse.adressenavn), Option(adresse.postnummer), Option(adresse.poststed))),
-      "info" -> text(0)
+      "info" -> optional(text)
 
     )(Person.apply)(Person.unapply)
   )

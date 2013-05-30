@@ -17,13 +17,11 @@ angular.module('ooPersonController', [])
 //        console.log(person.adresse)
 
         $scope.submitPerson = function() {
-//            console.log('Submitted: ', $scope.person);
-//            var sistePerson = _.last($scope.personListe);
-//            $scope.person.id = sistePerson ? sistePerson.id + 1 : 1;
-//            $scope.personListe.push(angular.copy($scope.person));
             $scope.person.adresse.adresseId = $scope.person.adresse.id;
             $.post('/personer', JSON.stringify($scope.person)).success(function(){
                 fetchModel('personListe', '/personer');
+            }).error(function(error){
+                alert(error);
             });
         }
 

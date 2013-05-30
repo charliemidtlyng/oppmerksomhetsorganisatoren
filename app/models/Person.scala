@@ -8,7 +8,7 @@ import AnormExtension._
 import play.api.libs.json.Json
 
 
-case class Person(id: Option[Long], navn: String, fodselsdato: DateTime, adresse: Adresse, info: String )
+case class Person(id: Option[Long], navn: String, fodselsdato: DateTime, adresse: Adresse, info: Option[String] )
 
 object Person {
 
@@ -17,7 +17,7 @@ object Person {
       get[String]("navn") ~
       get[DateTime]("fodselsdato") ~
       get[Long]("adresseId") ~
-      get[String]("info") map {
+      get[Option[String]]("info") map {
       case id~navn~fodselsdato~adresse~info=> Person(id, navn, fodselsdato, Adresse.finn(adresse), info)
     }
   }

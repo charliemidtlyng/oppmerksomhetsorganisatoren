@@ -1,21 +1,33 @@
 <h1>Adresser</h1>
-<form name="adresser" ng-submit="submitAdresse()">
-    <label>Gateadresse:<br/>
-        <input type="text" ng-model="adresse.adressenavn" required />
-    </label>
+<form name="adresser" ng-submit="submitAdresse()" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="gateadresse">Gateadresse:</label>
+        <div class="controls">
+            <input id="gateadresse" type="text" ng-model="adresse.adressenavn" required />
+        </div>
+    </div>
 
-    <label>
-        Postnummer: <br />
-        <input type="number" ng-model="adresse.postnummer" name="aPostnummer"/>
-    </label>
+    <div class="control-group">
+        <label class="control-label" for="postnummer">Postnummer:</label>
+        <div class="controls">
+            <input id="postnummer" name="postnummer" type="text" ng-model="adresse.postnummer" name="aPostnummer" ng-minlength="4" ng-maxlength="4"/>
+        </div>
+    </div>
 
-    <label>
-        Poststed: <br />
-        <input type="text" ng-model="adresse.poststed" required name="aPoststed"/>
-    </label>
+    <div class="control-group">
+        <label class="control-label" for="poststed">Poststed:</label>
+        <div class="controls">
+            <input id="poststed" type="text" ng-model="adresse.poststed" required name="aPoststed"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button ng-disabled="adresser.$invalid">Lagre</button>
+        </div>
+    </div>
 
 
-    <button ng-disabled="adresser.$invalid">Lagre</button>
 </form>
 <ul>
     <li ng-repeat="adresse in adresseListe">

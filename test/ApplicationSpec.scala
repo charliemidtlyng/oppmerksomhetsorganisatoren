@@ -26,7 +26,18 @@ class ApplicationSpec extends Specification {
         
         status(home) must equalTo(OK)
         contentType(home) must beSome.which(_ == "text/html")
-        contentAsString(home) must contain ("Your new application is ready.")
+        contentAsString(home) must contain ("Oppmerksomhetsorganisatoren")
+      }
+    }
+
+    "fetch all persons" in {
+      running(FakeApplication()) {
+        val personer = route(FakeRequest(GET, "/personer")).get
+
+        status(personer) must equalTo(OK)
+        contentType(personer) must beSome.which(_ == "application/json")
+        contentAsString(personer) must contain ("[")
+        contentAsString(personer) must contain ("]")
       }
     }
   }
