@@ -21,26 +21,26 @@ object OppmerksomhetController extends Controller {
     mapping(
       "id" -> optional(longNumber),
       "til" -> mapping(
-        "id" -> longNumber)
+        "id" -> optional(longNumber))
         ((tilId) => {
           val a: Involvert = new Involvert() {
-            val id: Option[Long] = Option(tilId)
+            val id: Option[Long] = tilId
           }
           Option(a)
         }
         )
-        ((t: Option[Involvert]) => Option(t.get.id.get)),
+        ((t: Option[Involvert]) => Option(t.get.id)),
       "tilType" -> optional(enum(Involverttype)),
       "fra" -> mapping(
-        "id" -> longNumber)
+        "id" -> optional(longNumber))
         ((fraId) => {
           val a: Involvert = new Involvert() {
-            val id: Option[Long] = Option(fraId)
+            val id: Option[Long] = fraId
           }
           Option(a)
         }
         )
-        ((t: Option[Involvert]) => Option(t.get.id.get)),
+        ((t: Option[Involvert]) => Option(t.get.id)),
       "fraType" -> optional(enum(Involverttype)),
       "url" -> optional(text),
       "info" -> optional(text),

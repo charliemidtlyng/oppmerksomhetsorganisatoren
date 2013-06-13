@@ -38,23 +38,25 @@ object Oppmerksomhet {
     involvertType match {
       case Some(Involverttype.Familie) => Option(Adresse.finn(involvertId.get))
       case Some(Involverttype.Person) => Option(Person.finn(involvertId.get))
-      case _ => throw new IllegalArgumentException("Mangler involverttype")
+      case _ => None
     }
   }
 
   def utledInvolvertType(involvertType: Option[String]): Option[Involverttype.Value] = {
-    Involverttype.withName(involvertType.getOrElse("")) match {
+
+    val typetekst:String = if(involvertType.getOrElse("").isEmpty) "Ingen" else involvertType.get
+    Involverttype.withName(typetekst) match {
       case Involverttype.Familie => Option(Involverttype.Familie)
       case Involverttype.Person => Option(Involverttype.Person)
-      case _ => throw new IllegalArgumentException("Mangler involverttype")
+      case _ => Option(Involverttype.Ingen)
     }
   }
 
   val oppmerksomhet = {
     get[Option[Long]]("id") ~
-      get[Option[Long]]("til") ~
+      get[Option[Long]]("til_id") ~
       get[Option[String]]("tilType") ~
-      get[Option[Long]]("fra") ~
+      get[Option[Long]]("fra_id") ~
       get[Option[String]]("fraType") ~
       get[Option[String]]("url") ~
       get[Option[String]]("info") ~
@@ -63,8 +65,8 @@ object Oppmerksomhet {
       get[String]("hendelsestype") ~
       get[Boolean]("levert") ~
       get[String]("rolle") map {
-      case id ~ til ~ tilType ~ fra ~ fraType ~ url ~ info ~ verdi ~ tid ~ hendelsestype ~ levert ~ rolle =>
-        Oppmerksomhet(id, utledInvolvert(til, tilType), utledInvolvertType(tilType), utledInvolvert(fra, fraType), utledInvolvertType(fraType), url, info, verdi, tid, Hendelsestype.withName(hendelsestype), levert, Rolle.withName(rolle))
+      case id ~ til_id ~ tilType ~ fra_id ~ fraType ~ url ~ info ~ verdi ~ tid ~ hendelsestype ~ levert ~ rolle =>
+        Oppmerksomhet(id, utledInvolvert(til_id, tilType), utledInvolvertType(tilType), utledInvolvert(fra_id, fraType), utledInvolvertType(fraType), url, info, verdi, tid, Hendelsestype.withName(hendelsestype), levert, Rolle.withName(rolle))
     }
   }
 
@@ -73,16 +75,16 @@ object Oppmerksomhet {
       implicit c =>
         SQL("insert into oppmerksomhet (til_id,tilType, fra_id, fraType, url, info, verdi, tid, hendelsestype, levert, rolle) values ({til}, {tilType}, {fra}, {fraType}, {url}, {info}, {verdi}, {tid}, {hendelsestype}, {levert}, {rolle})").on(
           'til -> Superoperators.?(o.til.get.id),
-          'tilType -> o.tilType,
+          'tilType -> o.tilType.getOrElse("").toString,
           'fra -> Superoperators.?(o.fra.get.id),
-          'fra -> o.fraType,
-          'url -> o.url,
-          'info -> o.info,
-          'verdi -> o.verdi,
+          'fraType -> o.fraType.getOrElse("").toString,
+          'url -> o.url.getOrElse(""),
+          'info -> o.info.getOrElse(""),
+          'verdi -> o.verdi.getOrElse(0),
           'tid -> o.tid,
-          'hendelsestype -> o.hendelsestype,
+          'hendelsestype -> o.hendelsestype.toString,
           'levert -> o.levert,
-          'rolle -> o.rolle
+          'rolle -> o.rolle.toString
         ).executeInsert()
     }
   }

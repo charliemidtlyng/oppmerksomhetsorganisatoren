@@ -5,5 +5,5 @@ package models.enums
  * @since 2.47
  */
 object Involverttype extends  Enumeration {
-  val Familie, Person = Value
+  val Familie, Person, Ingen = Value
 }
