@@ -10,15 +10,16 @@ import play.api.libs.json._
 import anorm.~
 import play.api.libs.json.JsObject
 
-case class Adresse(id:Option[Long], adressenavn: String, postnummer: String, poststed: String)
+case class Adresse(id:Option[Long], familienavn: String, adressenavn: String, postnummer: String, poststed: String) extends Involvert
 
   object Adresse {
   val adresse = {
     get[Option[Long]]("id") ~
+      get[String]("familienavn") ~
       get[String]("adressenavn") ~
       get[String]("postnummer") ~
       get[String]("poststed") map {
-      case id ~ adressenavn ~ postnummer ~ poststed => Adresse(id, adressenavn, postnummer, poststed)
+      case id ~ familienavn ~ adressenavn ~ postnummer ~ poststed => Adresse(id, familienavn, adressenavn, postnummer, poststed)
     }
   }
 
@@ -31,7 +32,8 @@ case class Adresse(id:Option[Long], adressenavn: String, postnummer: String, pos
   def opprett(adresse: Adresse)= {
     DB.withConnection {
       implicit c =>
-        SQL("insert into adresse (adressenavn, postnummer, poststed) values ({adressenavn}, {postnummer}, {poststed})").on(
+        SQL("insert into adresse (familienavn, adressenavn, postnummer, poststed) values ({familienavn}, {adressenavn}, {postnummer}, {poststed})").on(
+          'familienavn-> adresse.familienavn,
           'adressenavn -> adresse.adressenavn,
           'postnummer -> adresse.postnummer,
           'poststed -> adresse.poststed

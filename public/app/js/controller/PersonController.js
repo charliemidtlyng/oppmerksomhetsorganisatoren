@@ -4,17 +4,11 @@ angular.module('ooPersonController', [])
 
     .controller('PersonController', ['$scope', function ($scope) {
 
-        $scope.adresseListe = [
-            {id: 1, navn: "h0h0", postnummer: '0040', poststed: 'Oslo'},
-            {id: 2, navn: "h0h02", postnummer: '0041', poststed: 'TRH'}
-        ];
-
+        $scope.adresseListe = [];
         $scope.personListe = [];
         $scope.person = {
             adresse: {}
         }
-
-//        console.log(person.adresse)
 
         $scope.submitPerson = function() {
             $scope.person.adresse.adresseId = $scope.person.adresse.id;

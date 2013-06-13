@@ -22,21 +22,22 @@ object PersonController extends Controller {
       "adresse" -> mapping(
         "adresseId" -> optional(longNumber),
         "adressenavn" -> optional(text),
+        "familienavn" -> optional(text),
         "postnummer" -> optional(text),
         "poststed" -> optional(text)
       )
-        ((adresseId: Option[Long], adressenavn:Option[String], postnummer: Option[String], poststed: Option[String]) => {
+        ((adresseId: Option[Long],familienavn:Option[String], adressenavn:Option[String], postnummer: Option[String], poststed: Option[String]) => {
           if(adresseId.isEmpty && (adressenavn.isEmpty || postnummer.isEmpty || poststed.isEmpty)){
             BadRequest(Json.toJson("Mangler adresseinfo"))
           }
           if(adresseId.isEmpty) {
-            val a:Option[Long] = Adresse.opprett(Adresse(adresseId, adressenavn.get, postnummer.get, poststed.get))
+            val a:Option[Long] = Adresse.opprett(Adresse(adresseId, familienavn.get, adressenavn.get, postnummer.get, poststed.get))
             Adresse.finn(a.get)
           } else {
             Adresse.finn(adresseId.get)
           }
         })
-        ((adresse: Adresse) => Some(adresse.id, Option(adresse.adressenavn), Option(adresse.postnummer), Option(adresse.poststed))),
+        ((adresse: Adresse) => Some(adresse.id, Option(adresse.familienavn), Option(adresse.adressenavn), Option(adresse.postnummer), Option(adresse.poststed))),
       "info" -> optional(text)
 
     )(Person.apply)(Person.unapply)

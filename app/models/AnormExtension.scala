@@ -2,6 +2,9 @@ package models
 import org.joda.time._
 import org.joda.time.format._
 import anorm._
+import play.api.data.format.{Formats, Formatter}
+import play.api.data.{Mapping, FormError}
+import play.api.data.Forms._
 
 object AnormExtension {
 
@@ -23,5 +26,19 @@ object AnormExtension {
       s.setTimestamp(index, new java.sql.Timestamp(aValue.withMillisOfSecond(0).getMillis()) )
     }
   }
+
+
+  def enumFormat[E <: Enumeration](enum: E): Formatter[E#Value] = new Formatter[E#Value] {
+    def bind(key: String, data: Map[String, String]) = {
+      Formats.stringFormat.bind(key, data).right.flatMap { s =>
+        scala.util.control.Exception.allCatch[E#Value]
+          .either(enum.withName(s))
+          .left.map(e => Seq(FormError(key, "error.enum", Nil)))
+      }
+    }
+    def unbind(key: String, value: E#Value) = Map(key -> value.toString)
+  }
+
+  def enum[E <: Enumeration](enum: E): Mapping[E#Value] = of(enumFormat(enum))
 
 }

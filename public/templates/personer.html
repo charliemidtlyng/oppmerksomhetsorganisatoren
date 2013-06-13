@@ -31,6 +31,13 @@
 
     <div ng-hide="person.adresse.id">
         <div class="control-group">
+            <label class="control-label" for="familienavn">Familienavn:</label>
+            <div class="controls">
+                <input id="familienavn" type="text" ng-model="person.adresse.familienavn" ng-required="!person.adresse.id"/>
+            </div>
+        </div>
+
+        <div class="control-group">
             <label class="control-label" for="gateadresse">Gateadresse:</label>
             <div class="controls">
                 <input id="gateadresse" type="text" ng-model="person.adresse.adressenavn" ng-required="!person.adresse.id"/>

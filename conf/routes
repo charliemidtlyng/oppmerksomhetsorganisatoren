@@ -18,3 +18,6 @@ GET     /personer                 controllers.PersonController.personer
 POST    /personer                 controllers.PersonController.nyPerson
 POST    /personer/:id/slett       controllers.PersonController.slettPerson(id: Long)
 GET     /personerPaaAdresse/:adresseId controllers.PersonController.finnPersonerPaaAdresse(adresseId: Long)
+
+GET     /oppmerksomheter          controllers.OppmerksomhetController.oppmerksomheter
+POST    /oppmerksomheter          controllers.OppmerksomhetController.nyOppmerksomhet

@@ -14,6 +14,7 @@ object AdresseController extends Controller {
   val adresseForm = Form(
     mapping(
       "id" -> optional(longNumber),
+      "familienavn" -> text,
       "adressenavn" -> text,
       "postnummer" -> text(0, 4),
       "poststed" -> text

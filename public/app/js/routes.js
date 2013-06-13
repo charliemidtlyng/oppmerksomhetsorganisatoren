@@ -18,8 +18,13 @@ angular.module('ooRoutes', [])
                 templateUrl: 'assets/templates/personer.html',
                 controller: 'PersonController',
                 activetab: 'personer'
-            }).
-            when('/personerPaaAdresse/:adresseId',{
+            })
+            .when('/oppmerksomheter', {
+                templateUrl: 'assets/templates/oppmerksomheter.html',
+                controller: 'OppmerksomhetController',
+                activetab: 'oppmerksomheter'
+            })
+            .when('/personerPaaAdresse/:adresseId',{
                 templateUrl: 'assets/templates/personerPaaAdresse.html',
                 controller: 'PersonAdresseController',
                 activetab: 'personer'
