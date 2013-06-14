@@ -17,7 +17,6 @@ CREATE TABLE oppmerksomhet (
     rolle varchar(32)
 );
 
-
 # --- !Downs
 DROP TABLE oppmerksomhet;
 DROP SEQUENCE oppmerksomhet_id_seq;
