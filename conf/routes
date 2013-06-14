@@ -20,4 +20,5 @@ POST    /personer/:id/slett       controllers.PersonController.slettPerson(id: L
 GET     /personerPaaAdresse/:adresseId controllers.PersonController.finnPersonerPaaAdresse(adresseId: Long)
 
 GET     /oppmerksomheter          controllers.OppmerksomhetController.oppmerksomheter
+GET     /oppmerksomheter/:id          controllers.OppmerksomhetController.oppmerksomhet(id: Long)
 POST    /oppmerksomheter          controllers.OppmerksomhetController.nyOppmerksomhet

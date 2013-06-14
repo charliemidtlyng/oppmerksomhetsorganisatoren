@@ -10,7 +10,7 @@ CREATE TABLE oppmerksomhet (
     fraType varchar(32),
     url varchar(255),
     info varchar(255),
-    verdi double,
+    verdi double PRECISION,
     tid timestamp,
     hendelsestype varchar(32),
     levert boolean,

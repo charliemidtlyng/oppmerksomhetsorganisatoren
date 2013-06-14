@@ -3,6 +3,7 @@
 angular.module('ooApp', [
     'ooRoutes',
     'ooDirectives',
+    'ooFilters',
     'ooAdresseController',
     'ooPersonController',
     'ooOppmerksomhetController',

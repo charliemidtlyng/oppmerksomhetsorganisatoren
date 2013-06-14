@@ -76,3 +76,9 @@
         </div>
     </div>
 </form>
+
+<ul>
+    <li ng-repeat="oppmerksomhet in oppmerksomheter">
+        <a href="#/oppmerksomheter/{{oppmerksomhet.id}}">Til: {{oppmerksomhet.til | utledInvolvert : oppmerksomhet.tilType}}, Fra: {{oppmerksomhet.fra | utledInvolvert : oppmerksomhet.fraType}}, Dato: {{oppmerksomhet.tid | date: 'dd-MM-yyyy'}}</a>
+    </li>
+</ul>

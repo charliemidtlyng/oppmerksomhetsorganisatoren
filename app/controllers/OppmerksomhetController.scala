@@ -64,9 +64,11 @@ object OppmerksomhetController extends Controller {
       )
   }
 
-
   def oppmerksomheter = Action {
     Ok(Json.toJson(Oppmerksomhet.all()))
   }
 
+  def oppmerksomhet(id: Long) = Action {
+    Ok(Json.toJson(Oppmerksomhet.finn(id)))
+  }
 }

@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('ooOppmerksomhetController', [])
-
     .controller('OppmerksomhetController', ['$scope', function ($scope) {
 
         $scope.oppmerksomhet = {};
         $scope.involvertListe = [];
         $scope.hendelsestypeListe = ["Gave", "Gavekort", "Julekort", "Takkekort"];
         $scope.rolleListe = ["Mottaker", "Giver"];
+        $scope.oppmerksomheter = [];
 
 
         $scope.submitOppmerksomhet = function () {
@@ -16,7 +16,7 @@ angular.module('ooOppmerksomhetController', [])
             $scope.oppmerksomhet.verdi = $scope.oppmerksomhet.verdi ? $scope.oppmerksomhet.verdi.replace(/,/g, '.') : $scope.oppmerksomhet.verdi;
             console.log(JSON.stringify($scope.oppmerksomhet));
             $.post('/oppmerksomheter', JSON.stringify($scope.oppmerksomhet)).success(function () {
-                alert(ok);
+                oppdaterOppmerksomheter();
             }).error(function (error) {
                     alert(error);
                 });
@@ -24,7 +24,7 @@ angular.module('ooOppmerksomhetController', [])
 
         $scope.slettOppmerksomhet = function (oppmerksomhet) {
             $.post('/oppmerksomheter/' + oppmerksomhet.id + '/slett').success(function (result) {
-//                fetchModel('personListe', '/personer');
+                oppdaterOppmerksomheter();
                 alert("ok");
             });
         }
@@ -44,5 +44,21 @@ angular.module('ooOppmerksomhetController', [])
             $scope.$apply();
         });
 
+        var oppdaterOppmerksomheter = function() {
+            $.get("/oppmerksomheter").success(function (result) {
+                $scope.oppmerksomheter = result;
+                $scope.$apply();
+            });
+        }
+        oppdaterOppmerksomheter();
+
     }])
+    .controller('EnkelOppmerksomhetController',['$scope', '$routeParams', function ($scope, $routeParams) {
+        var id = $routeParams.id;
+        $.get("/oppmerksomheter/".concat(id)).success(function(result){
+            $scope.oppmerksomhet = result;
+            $scope.$apply();
+        })
+    }])
+
 ;

@@ -24,6 +24,11 @@ angular.module('ooRoutes', [])
                 controller: 'OppmerksomhetController',
                 activetab: 'oppmerksomheter'
             })
+            .when('/oppmerksomheter/:id', {
+                templateUrl: 'assets/templates/oppmerksomhet.html',
+                controller: 'EnkelOppmerksomhetController',
+                activetab: 'oppmerksomheter'
+            })
             .when('/personerPaaAdresse/:adresseId',{
                 templateUrl: 'assets/templates/personerPaaAdresse.html',
                 controller: 'PersonAdresseController',
