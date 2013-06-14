@@ -10,9 +10,8 @@ import special.Superoperators
 import models.enums.{EnumUtils, Rolle, Hendelsestype, Involverttype}
 import models.enums.EnumUtils._
 import play.api.libs.json.{Reads, Json}
-import se.radley.plugin.enumeration._
 import play.api.libs.json._
-
+import java.math.BigDecimal
 
 /**
  * @author Charlie Midtlyng (charlie.midtlyng@BEKK.no)
@@ -60,13 +59,13 @@ object Oppmerksomhet {
       get[Option[String]]("fraType") ~
       get[Option[String]]("url") ~
       get[Option[String]]("info") ~
-      get[Option[Double]]("verdi") ~
+      get[Option[BigDecimal]]("verdi") ~
       get[DateTime]("tid") ~
       get[String]("hendelsestype") ~
       get[Boolean]("levert") ~
       get[String]("rolle") map {
       case id ~ til_id ~ tilType ~ fra_id ~ fraType ~ url ~ info ~ verdi ~ tid ~ hendelsestype ~ levert ~ rolle =>
-        Oppmerksomhet(id, utledInvolvert(til_id, tilType), utledInvolvertType(tilType), utledInvolvert(fra_id, fraType), utledInvolvertType(fraType), url, info, verdi, tid, Hendelsestype.withName(hendelsestype), levert, Rolle.withName(rolle))
+        Oppmerksomhet(id, utledInvolvert(til_id, tilType), utledInvolvertType(tilType), utledInvolvert(fra_id, fraType), utledInvolvertType(fraType), url, info, Option(verdi.getOrElse(new BigDecimal(0)).doubleValue()), tid, Hendelsestype.withName(hendelsestype), levert, Rolle.withName(rolle))
     }
   }
 
