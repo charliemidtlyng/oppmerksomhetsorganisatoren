@@ -8,6 +8,7 @@ angular.module('ooApp', [
     'ooPersonController',
     'ooOppmerksomhetController',
     'ooPersonAdresseController',
+    'ui.calendar',
 
     'ngResource'
 ]);

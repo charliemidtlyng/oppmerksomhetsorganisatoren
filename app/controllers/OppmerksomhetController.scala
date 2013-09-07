@@ -58,8 +58,12 @@ object OppmerksomhetController extends Controller {
       oppmerksomhetForm.bindFromRequest.fold(
         errors => BadRequest(Json.toJson(errors.errorsAsJson)),
         oppmerksomhet => {
-          val p = Oppmerksomhet.opprett(oppmerksomhet)
-          Ok(Json.toJson(p))
+
+          if(oppmerksomhet.id.isDefined)
+            Ok(Json.toJson(Oppmerksomhet.oppdater(oppmerksomhet)))
+          else
+            Ok(Json.toJson(Oppmerksomhet.opprett(oppmerksomhet)))
+//          Ok(Json.toJson(p))
         }
       )
   }

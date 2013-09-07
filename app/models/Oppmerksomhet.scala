@@ -88,6 +88,27 @@ object Oppmerksomhet {
     }
   }
 
+  def oppdater(o: Oppmerksomhet):Oppmerksomhet = {
+    DB.withConnection {
+      implicit c =>
+        SQL("update oppmerksomhet set til_id={til}, tilType={tilType}, fra_id={fra}, fraType={fraType}, url={url}, info={info}, verdi={verdi}, tid={tid}, hendelsestype={hendelsestype}, levert={levert}, rolle={rolle} where id={id}").on(
+          'id -> o.id,
+          'til -> Superoperators.?(o.til.get.id),
+          'tilType -> o.tilType.getOrElse("").toString,
+          'fra -> Superoperators.?(o.fra.get.id),
+          'fraType -> o.fraType.getOrElse("").toString,
+          'url -> o.url.getOrElse(""),
+          'info -> o.info.getOrElse(""),
+          'verdi -> o.verdi.getOrElse(0),
+          'tid -> o.tid,
+          'hendelsestype -> o.hendelsestype.toString,
+          'levert -> o.levert,
+          'rolle -> o.rolle.toString
+        ).executeUpdate()
+    }
+    finn(o.id.get)
+  }
+
   def finn(id: Long): Oppmerksomhet = {
     DB.withConnection {
       implicit connection =>
@@ -100,31 +121,6 @@ object Oppmerksomhet {
     implicit c =>
       SQL("select * from oppmerksomhet").as(oppmerksomhet *)
   }
-
-
-//  implicit val involvertWrite = new Writes[Involvert] {
-//    def writes(i: Involvert): JsValue = {
-//      if(i.isInstanceOf[Person]){
-//        Json.toJson(i)
-//      } else if(i.isInstanceOf[Adresse]) {
-//        Json.toJson(i)
-//      } else {
-//        Json.obj("id" -> i.id)
-//      }
-//    }
-//  }
-//
-//  implicit val involvertRead = new Reads[Involvert] {
-//    def reads(i: Involvert): JsValue = {
-//      if(i.isInstanceOf[Person]){
-//        Json.toJson(i)
-//      } else if(i.isInstanceOf[Adresse]) {
-//        Json.toJson(i)
-//      } else {
-//        Json.obj("id" -> i.id)
-//      }
-//    }
-//  }
 
   implicit val involvertFormat = new Format[Involvert] {
 
@@ -152,25 +148,6 @@ object Oppmerksomhet {
   implicit val oppmerksomhetFormat = Json.format[Oppmerksomhet]
 
 
-  //  id: Option[Long],
-//  til: Option[Involvert],
-//  tilType: Option[models.enums.Involverttype.Value],
-//  fra: Option[Involvert],
-//  fraType: Option[models.enums.Involverttype.Value],
-//  url: Option[String],
-//  info: Option[String],
-//  verdi: Option[Double],
-//  tid: DateTime,
-//  hendelsestype: models.enums.Hendelsestype.Value,
-//  levert: Boolean,
-//  rolle: models.enums.Rolle.Value
-
-//  implicit val oppmerksomhetFormat = (
-//      (__ \ "id").formatNullable[Long] and
-//      (__ \ "til").formatNullable[String] and
-//      (__ \ "tiltype").format[Long]
-//    )((id, name, group) => Oppmerksomhet(id, name, group),
-//    (p: Oppmerksomhet) => (Option(p.id), p.til, p.groupId))
 
 
 }
